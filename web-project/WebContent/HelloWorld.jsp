@@ -7,48 +7,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<%
-		for (int i = 1; i <= 10; i++) {
-	%>
-	<div align="center">
-		<h1><%=i%>
-			HelloWorld
-		</h1>
-		<h2><%=i%>
-			HelloWorld
-		</h2>
-		<h3><%=i%>
-			HelloWorld
-		</h3>
-
-	</div>
-	<div align="right">
-		<h1><%=i%>
-			HelloWorld
-		</h1>
-		<h2><%=i%>
-			HelloWorld
-		</h2>
-		<h3><%=i%>
-			HelloWorld
-		</h3>
-
-	</div>
-	<div align="left">
-		<h1><%=i%>
-			HelloWorld
-		</h1>
-		<h2><%=i%>
-			HelloWorld
-		</h2>
-		<h3><%=i%>
-			HelloWorld
-		</h3>
-
-	</div>
-	<%
-		}
-	%>
+	<h1 style="color: red">Noun</h1>
+	<h3>A noun is a word that a person, place,thing,or idea</h3>
+	<h2 style="color: red">Example</h2>
+	<h3>1 Person</h3>
+	<h3>2 Place</h3>
+	<h3>3 Thing</h3>
+	<h3>4 Idea</h3>
 
 </body>
 </html>

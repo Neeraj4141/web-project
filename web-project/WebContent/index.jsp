@@ -8,21 +8,23 @@
 </head>
 <body>
 	<%
-		for (int i = 10; i <= 10; i++) {
+		for (int i = 0; i <= 100; i++) {
 	%>
-
-
 	<div align="center">
-		<h1>Hello world</h1>
-		<h2>Hello world</h2>
-		<h3>Hello world</h3>
-		<h4>Hello world</h4>
-		<h5>Hello world</h5>
-		<h6>Hello world</h6>
+		<h1><%=i%>Neeraj
+		</h1>
 	</div>
-
+	<div align="left">
+		<h1><%=i%>Neeraj
+		</h1>
+	</div>
+	<div align="right">
+		<h1><%=i%>Neeraj
+		</h1>
+	</div>
 	<%
 		}
 	%>
+
 </body>
 </html>
