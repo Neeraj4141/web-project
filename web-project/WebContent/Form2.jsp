@@ -8,12 +8,12 @@
 </head>
 <body>
 	<div align="center">
-		<h1 style="color:gray;">Second Form</h1>
-		<form action="">
+		<h1 style="color: gray;">Second Form</h1>
+		<form action="GetForm2Data.jsp">
 
 			<table>
 				<tr>
-					<th>Firstname</th>
+					<th>FirstName</th>
 					<td><input type="text" name="firstName" value=""
 						placeholder="enter frist name"></td>
 
@@ -31,7 +31,7 @@
 
 				</tr>
 				<tr>
-					<th>password</th>
+					<th>Password</th>
 					<td><input type="password" name="password" value=""
 						placeholder="enter password"></td>
 
