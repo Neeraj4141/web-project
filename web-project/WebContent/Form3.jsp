@@ -7,30 +7,30 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div align="center">
-		<h1>First From</h1>
-		<form action="GetFormData.jsp">
-
+	<form action="GetForm3Data.jsp">
+		<div align="center">
+			<h1 style="color: maroon;">My Third Form</h1>
 			<table>
+
 				<tr>
 					<th>FirstName</th>
 					<td><input type="text" name="firstName" value=""
-						placeholder="enter your firstname"></td>
+						placeholder="enter firstname"></td>
 				</tr>
 				<tr>
 					<th>LastName</th>
 					<td><input type="text" name="lastName" value=""
-						placeholder="enter your lastname"></td>
+						placeholder="enter lastname"></td>
 				</tr>
 				<tr>
-					<th>Login</th>
+					<th>LoginId</th>
 					<td><input type="email" name="login" value=""
-						placeholder="enter your loginid"></td>
+						placeholder="enter loginid"></td>
 				</tr>
 				<tr>
 					<th>Password</th>
 					<td><input type="password" name="password" value=""
-						placeholder="enter your password"></td>
+						placeholder="enter password"></td>
 				</tr>
 				<tr>
 					<th>Dob</th>
@@ -38,12 +38,12 @@
 				</tr>
 				<tr>
 					<th></th>
+
 					<td><input type="submit" name="operation" value="save"></td>
 				</tr>
-
-
 			</table>
-		</form>
-	</div>
+		</div>
+	</form>
+
 </body>
 </html>
