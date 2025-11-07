@@ -13,11 +13,11 @@
 		String ErrorMsg = (String) request.getAttribute("ErrorMsg");
 	%>
 	<div align="center">
-		<h1>User Registration</h1>
+		<h1>Login</h1>
 		<%
 			if (SuccessMsg != null) {
 		%>
-		<h3 style="color: green"><%=SuccessMsg%></h3>
+		<h3 style="color: green;"><%=SuccessMsg%></h3>
 		<%
 			}
 		%>
@@ -28,41 +28,22 @@
 		<%
 			}
 		%>
-		<form action="UserRegistrationCtl" method="post">
+
+		<form action="LoginCtl" method="post">
 			<table>
 				<tr>
-					<th>FirstName</th>
-					<td><input type="text" name="firstName" value=""
-						placeholder="enter firstname"></td>
-
-				</tr>
-				<tr>
-					<th>LastName</th>
-					<td><input type="text" name="lastName" value=""
-						placeholder="enter lastname"></td>
-
-				</tr>
-				<tr>
-					<th>Login</th>
+					<th>LoginId</th>
 					<td><input type="email" name="login" value=""
 						placeholder="enter loginid"></td>
-
 				</tr>
 				<tr>
 					<th>Password</th>
 					<td><input type="password" name="password" value=""
-						placeholder="password"></td>
-
-				</tr>
-				<tr>
-					<th>DOb</th>
-					<td><input type="date" name="dob" value=""></td>
-
+						placeholder="enter password"></td>
 				</tr>
 				<tr>
 
-					<td><input type="submit" name="submit" value="signUp"></td>
-
+					<td><input type="submit" name="operation" value="signIn"></td>
 				</tr>
 			</table>
 		</form>
