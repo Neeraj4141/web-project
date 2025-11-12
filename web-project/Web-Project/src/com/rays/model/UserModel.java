@@ -4,6 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.tomcat.dbcp.dbcp2.Jdbc41Bridge;
 
 import com.rays.bean.UserBean;
 import com.rays.util.JDBCDataSource;
@@ -105,10 +109,13 @@ public class UserModel {
 	}
 
 	public UserBean authanticate(String login, String password) throws SQLException {
+
 		Connection conn = JDBCDataSource.getConnection();
-		PreparedStatement pstmt = conn.prepareStatement("select * from st_user where loginid = ? and where password = ?");
+		PreparedStatement pstmt = conn.prepareStatement("select * from st_user where loginid = ? and password = ?");
+
 		pstmt.setString(1, login);
 		pstmt.setString(2, password);
+
 		ResultSet rs = pstmt.executeQuery();
 
 		UserBean bean = null;
@@ -124,6 +131,46 @@ public class UserModel {
 		}
 		conn.close();
 		return bean;
+
+	}
+
+	public List search(UserBean bean) throws Exception {
+
+		List list = new ArrayList();
+		StringBuffer sql = new StringBuffer("select * from st_user where 1=1");
+
+		if (bean != null) {
+			if (bean.getFirstName() != null && bean.getFirstName().length() > 0) {
+				sql.append(" and firstName like '" + bean.getFirstName() + "%'");
+			}
+			if (bean.getLastName() != null && bean.getLastName().length() > 0) {
+				sql.append(" and lastName like '" + bean.getLastName() + "%'");
+			}
+			if (bean.getLogin() != null && bean.getLogin().length() > 0) {
+				sql.append(" and loginid like '" + bean.getLogin() + "%'");
+			}
+		}
+
+		System.out.println("sql ===> " + sql.toString());
+
+		Connection conn = JDBCDataSource.getConnection();
+		PreparedStatement pstmt = conn.prepareStatement(sql.toString());
+		ResultSet rs = pstmt.executeQuery();
+
+		while (rs.next()) {
+			bean = new UserBean();
+			bean.setId(rs.getInt(1));
+			bean.setFirstName(rs.getString(2));
+			bean.setLastName(rs.getString(3));
+			bean.setLogin(rs.getString(4));
+			bean.setPassword(rs.getString(5));
+			bean.setDob(rs.getDate(6));
+			list.add(bean);
+
+		}
+
+		JDBCDataSource.closeConnection(conn);
+		return list;
 
 	}
 }

@@ -10,31 +10,26 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.catalina.User;
-
 import com.rays.bean.UserBean;
 import com.rays.model.UserModel;
 
-@WebServlet("/UserRegistrationCtl")
-public class UserRegistrationCtl extends HttpServlet {
+@WebServlet("/UserCtl")
+public class UserCtl extends HttpServlet {
 
-	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println("In doget Method Of UserRegistrationCtl");
-		response.sendRedirect("UserRegistrationView.jsp");
+		System.out.println(" in doget method of Userview");
+		response.sendRedirect("UserView.jsp");
+
 	}
 
-	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println("in doPost method...");
-
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		System.out.println("in post method of userview");
 
 		UserBean bean = new UserBean();
-
 		UserModel model = new UserModel();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
 		String firstName = request.getParameter("firstName");
 		String lastName = request.getParameter("lastName");
@@ -43,21 +38,22 @@ public class UserRegistrationCtl extends HttpServlet {
 		String dob = request.getParameter("dob");
 
 		try {
+
 			bean.setFirstName(firstName);
 			bean.setLastName(lastName);
 			bean.setLogin(login);
 			bean.setPassword(password);
 			bean.setDob(sdf.parse(dob));
 			model.add(bean);
-			request.setAttribute("SuccessMsg", "User Registration Successfully");
+			request.setAttribute("SuccessMsg", "User Added Successfully");
 
 		} catch (Exception e) {
 			request.setAttribute("ErrorMsg", e.getMessage());
 			e.printStackTrace();
+
 		}
-		RequestDispatcher rd = request.getRequestDispatcher("UserRegistrationView.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("UserView.jsp");
 		rd.forward(request, response);
-		
 
 	}
 

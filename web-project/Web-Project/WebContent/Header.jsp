@@ -1,3 +1,4 @@
+<%@page import="com.rays.bean.UserBean"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -7,10 +8,37 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h3>Hii,Guest</h3>
-	<a href="LoginCtl">login</a>
-	<a href="UserRegistrationCtl">SignUp</a>
-	<a href="WelcomeCtl">Welcome</a>
+	<%
+		UserBean userBean = (UserBean) session.getAttribute("user");
+	%>
+	<%
+		if (userBean != null) {
+	%>
+	<h1>
+		<%="Hii, " + userBean.getFirstName()%>
+	</h1>
+	<%
+		} else {
+	%>
+	<h2 style="color: maroon;">Hii, Guest</h2>
+	<%
+		}
+	%>
+	<%
+		if (userBean != null) {
+	%>
+	<a href="LoginCtl?operation=Logout">Logout</a> |
+	<a href="UserCtl">AddUser</a> |
+	<a href="UserListCtl">UserList</a> |
+	<%
+		} else {
+	%>
+	<a href="LoginCtl">Login</a> |
+	<a href="UserRegistrationCtl">SignUp</a> |
+	<%
+		}
+	%>
+	<a href="WelcomeCtl">Welcome |</a> |
 	<hr>
 
 </body>
