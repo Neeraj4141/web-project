@@ -12,10 +12,21 @@
 	<%
 		String SuccessMsg = (String) request.getAttribute("SuccessMsg");
 		String ErrorMsg = (String) request.getAttribute("ErrorMsg");
+		UserBean bean = (UserBean) request.getAttribute("bean");
 	%>
 	<div align="center">
-		<h1>Add User</h1>
 
+		<%
+			if (bean != null && bean.getId() > 0) {
+		%>
+		<h1>Update User</h1>
+		<%
+			} else {
+		%>
+		<h1>Add User</h1>
+		<%
+			}
+		%>
 		<%
 			if (SuccessMsg != null) {
 		%>
@@ -30,35 +41,44 @@
 		<%
 			}
 		%>
-		<form action="UserCtl" method="post">
+
+		<form action="UserCtl.do" method="post">
+			<input type="hidden" name="id"
+				value="<%=bean != null ? bean.getId() : ""%>">
 			<table>
 				<tr>
 					<th>FirstName</th>
-					<td><input type="text" name="firstName" value=""
+					<td><input type="text" name="firstName"
+						value="<%=bean != null ? bean.getFirstName() : ""%>"
 						placeholder="enter firstname"></td>
 				</tr>
 				<tr>
 					<th>LastName</th>
-					<td><input type="text" name="lastName" value=""
+					<td><input type="text" name="lastName"
+						value="<%=bean != null ? bean.getLastName() : ""%>"
 						placeholder="enter lastname"></td>
 				</tr>
 				<tr>
 					<th>LoginId</th>
-					<td><input type="email" name="login" value=""
+					<td><input type="email" name="login"
+						value="<%=bean != null ? bean.getLogin() : ""%>"
 						placeholder="enter loginid"></td>
 				</tr>
 				<tr>
 					<th>Password</th>
-					<td><input type="password" name="password" value=""
+					<td><input type="password" name="password"
+						value="<%=bean != null ? bean.getPassword() : ""%>"
 						placeholder="enter password"></td>
 				</tr>
 				<tr>
 					<th>DOB</th>
-					<td><input type="date" name="dob"></td>
+					<td><input type="date" name="dob"
+						value="<%=bean != null ? bean.getDob() : ""%>"></td>
 				</tr>
 				<tr>
 					<th></th>
-					<td><input type="submit" name="operation" value="save"></td>
+					<td><input type="submit" name="operation"
+						value="<%=bean != null ? "Update" : "Save"%>"></td>
 				</tr>
 
 			</table>
