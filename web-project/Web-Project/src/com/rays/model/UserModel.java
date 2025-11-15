@@ -161,7 +161,7 @@ public class UserModel {
 
 	}
 
-	public List search(UserBean bean) throws Exception {
+	public List search(UserBean bean, int pageNo, int pageSize) throws Exception {
 
 		List list = new ArrayList();
 		StringBuffer sql = new StringBuffer("select * from st_user where 1=1");
@@ -178,6 +178,11 @@ public class UserModel {
 			}
 		}
 
+		if (pageSize > 0) {
+			pageNo = (pageNo - 1) * pageSize;
+			sql.append(" limit " + pageNo + ", " + pageSize);
+
+		}
 		System.out.println("sql ===> " + sql.toString());
 
 		Connection conn = JDBCDataSource.getConnection();

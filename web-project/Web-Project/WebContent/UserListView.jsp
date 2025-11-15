@@ -13,6 +13,7 @@
 		List list = (List) request.getAttribute("list");
 		String SuccessMsg = (String) request.getAttribute("SuccessMsg");
 		String ErrorMsg = (String) request.getAttribute("ErrorMsg");
+		int pageNo = (int) request.getAttribute("pageNo");
 	%>
 	<%@ include file="Header.jsp"%>
 	<div align="center">
@@ -81,8 +82,14 @@
 			</table>
 			<br>
 			<table width="100%">
-				<input type="submit" name="operation" value="delete">
+				<td><input type="submit" name="operation"
+					<%=pageNo == 1 ? "disabled" : ""%> value="previous"></td>
+				<td align="center"><input type="submit" name="operation"
+					value="delete"></td>
+				<td align="right"><input type="submit" name="operation"
+					<%=list.size() < 5 ? "disabled" : ""%> value="next"></td>
 			</table>
+			<input type="hidden" name="pageNo" value="<%=pageNo%>">
 		</form>
 	</div>
 	<%@ include file="Footer.jsp"%>
