@@ -25,10 +25,12 @@ public class FrontCtl implements Filter {
 	@Override
 	public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain)
 			throws IOException, ServletException {
+		System.out.println("in do get method of front ctl");
 
 		HttpServletRequest request = (HttpServletRequest) req;
 		HttpServletResponse response = (HttpServletResponse) resp;
 		HttpSession session = request.getSession();
+		session.setMaxInactiveInterval(15);
 
 		if (session.getAttribute("user") == null) {
 			request.setAttribute("ErrorMsg", "Your session has been expired please re login ....");
