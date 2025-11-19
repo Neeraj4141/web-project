@@ -1,7 +1,6 @@
 package com.rays.controller;
 
 import java.io.IOException;
-import java.net.http.HttpRequest;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -30,7 +29,7 @@ public class FrontCtl implements Filter {
 		HttpServletRequest request = (HttpServletRequest) req;
 		HttpServletResponse response = (HttpServletResponse) resp;
 		HttpSession session = request.getSession();
-		session.setMaxInactiveInterval(15);
+		session.setMaxInactiveInterval(150);
 
 		if (session.getAttribute("user") == null) {
 			request.setAttribute("ErrorMsg", "Your session has been expired please re login ....");
