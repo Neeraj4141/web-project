@@ -7,9 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.catalina.User;
-import org.apache.tomcat.dbcp.dbcp2.Jdbc41Bridge;
-
 import com.rays.bean.UserBean;
 import com.rays.util.JDBCDataSource;
 
@@ -154,7 +151,6 @@ public class UserModel {
 			bean.setLogin(rs.getString(4));
 			bean.setPassword(rs.getString(5));
 			bean.setDob(rs.getDate(6));
-
 		}
 		conn.close();
 		return bean;

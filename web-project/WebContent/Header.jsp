@@ -14,9 +14,9 @@
 	<%
 		if (userBean != null) {
 	%>
-	<h1>
+	<h2>
 		<%="Hii, " + userBean.getFirstName()%>
-	</h1>
+	</h2>
 	<%
 		} else {
 	%>
