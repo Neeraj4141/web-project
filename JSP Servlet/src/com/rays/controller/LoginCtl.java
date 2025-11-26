@@ -1,7 +1,6 @@
 package com.rays.controller;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,13 +8,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.rays.bean.UserBean;
 import com.rays.model.UserModel;
 import com.rays.util.DataValidator;
 
-@WebServlet("/UserRegistrationCtl")
-public class UserRegistrationCtl extends HttpServlet {
+@WebServlet("/LoginCtl")
+public class LoginCtl extends HttpServlet {
 
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response)
@@ -25,58 +25,63 @@ public class UserRegistrationCtl extends HttpServlet {
 		System.out.println("op mila--->" + op);
 
 		if (op != null) {
-			if (!DataValidator.signUpValidation(request)) {
+			if (!DataValidator.LoginValidation(request)) {
 				System.out.println("Data validate nhi hai");
-				RequestDispatcher rd = request.getRequestDispatcher("UserRegistrationView.jsp");
+				RequestDispatcher rd = request.getRequestDispatcher("LoginView.jsp");
 				rd.forward(request, response);
 				return;
 			}
 		}
 
 		super.service(request, response);
-
 	}
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println("In doget Method Of UserRegistrationCtl");
-		response.sendRedirect("UserRegistrationView.jsp");
+		System.out.println("In doget method of loginctl");
+
+		String op = request.getParameter("operation");
+		if (op != null) {
+			HttpSession session = request.getSession();
+			session.invalidate(); // session.destroy
+			request.setAttribute("SuccessMsg", "User LogOut Successfully");
+
+		}
+		RequestDispatcher rd = request.getRequestDispatcher("LoginView.jsp");
+		rd.forward(request, response);
+
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println("in doPost method...");
-
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
 		UserBean bean = new UserBean();
-
 		UserModel model = new UserModel();
+		HttpSession session = request.getSession();
 
-		String firstName = request.getParameter("firstName");
-		String lastName = request.getParameter("lastName");
 		String login = request.getParameter("login");
 		String password = request.getParameter("password");
-		String dob = request.getParameter("dob");
 
 		try {
-			bean.setFirstName(firstName);
-			bean.setLastName(lastName);
-			bean.setLogin(login);
-			bean.setPassword(password);
-			bean.setDob(sdf.parse(dob));
-			model.add(bean);
-			request.setAttribute("SuccessMsg", "User Registration Successfully");
+			bean = model.authanticate(login, password);
+
+			if (bean != null) {
+
+				System.out.println("User Login Successfully");
+				session.setAttribute("user", bean);
+				response.sendRedirect("WelcomeCtl");
+			} else {
+				System.out.println("Invalid Login or Password");
+				request.setAttribute("ErrorMsg", "Invalid Login or Password");
+				RequestDispatcher rd = request.getRequestDispatcher("LoginView.jsp");
+				rd.forward(request, response);
+			}
 
 		} catch (Exception e) {
-			request.setAttribute("ErrorMsg", e.getMessage());
-			e.printStackTrace();
-		}
-		RequestDispatcher rd = request.getRequestDispatcher("UserRegistrationView.jsp");
-		rd.forward(request, response);
 
+		}
 	}
 
 }

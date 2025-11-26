@@ -38,7 +38,7 @@
 	<%
 		}
 	%>
-	<a href="WelcomeCtl">Welcome </a> |
+	<a href="WelcomeCtl">Welcome |</a> |
 	<hr>
 
 </body>
