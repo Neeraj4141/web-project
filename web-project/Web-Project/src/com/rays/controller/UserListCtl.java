@@ -33,7 +33,7 @@ public class UserListCtl extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		RequestDispatcher rd = request.getRequestDispatcher(null);
+		RequestDispatcher rd = request.getRequestDispatcher("UserListView.jsp");
 		rd.forward(request, response);
 	}
 

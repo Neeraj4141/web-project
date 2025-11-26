@@ -34,12 +34,12 @@
 				<tr>
 					<th>LoginId</th>
 					<td><input type="email" name="login" value=""
-						placeholder="enter loginid"></td>
+						placeholder="enter loginid"><span style="color: red"><%=request.getAttribute("login") != null ? request.getAttribute("login") : ""%></span></td>
 				</tr>
 				<tr>
 					<th>Password</th>
 					<td><input type="password" name="password" value=""
-						placeholder="enter password"></td>
+						placeholder="enter password"><span style="color: red"><%=request.getAttribute("password") != null ? request.getAttribute("password") : ""%></span></td>
 				</tr>
 				<tr>
 					<th></th>

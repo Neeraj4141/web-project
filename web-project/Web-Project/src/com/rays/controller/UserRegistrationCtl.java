@@ -10,13 +10,32 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.catalina.User;
-
 import com.rays.bean.UserBean;
 import com.rays.model.UserModel;
+import com.rays.util.DataValidator;
 
 @WebServlet("/UserRegistrationCtl")
 public class UserRegistrationCtl extends HttpServlet {
+
+	@Override
+	protected void service(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		String op = request.getParameter("operation");
+		System.out.println("op mila--->" + op);
+
+		if (op != null) {
+			if (!DataValidator.signUpValidation(request)) {
+				System.out.println("Data validate nhi hai");
+				RequestDispatcher rd = request.getRequestDispatcher("UserRegistrationView.jsp");
+				rd.forward(request, response);
+				return;
+			}
+		}
+
+		super.service(request, response);
+
+	}
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -57,7 +76,6 @@ public class UserRegistrationCtl extends HttpServlet {
 		}
 		RequestDispatcher rd = request.getRequestDispatcher("UserRegistrationView.jsp");
 		rd.forward(request, response);
-		
 
 	}
 
